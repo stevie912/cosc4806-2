@@ -8,6 +8,10 @@
   if (isset($_SESSION['failed_attempts'])) {
     echo "This is unsuccessful attempt number " . $_SESSION['failed_attempts'];
   }
+
+  if (isset($_SESSION['no_user'])) {
+    echo "No such user exists";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +36,7 @@
       <input type="submit" value="Submit">
     </form>
 
-    <a href="/new_user.php">Create new user</a>
+    <br>
+    <a href="/new_user.php"><h4>Create new user</h4></a>
   </body>
 </html>
