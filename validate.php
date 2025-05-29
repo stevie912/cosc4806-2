@@ -7,6 +7,7 @@ $username = $_REQUEST['username'];
 $_SESSION['username'] = $username;
 $password = $_REQUEST['password'];
 $password = password_hash($password, PASSWORD_DEFAULT);
+// $_SESSION['pass'] = $password;
 
 $db = db_connect();
 //check user is in database
@@ -24,6 +25,7 @@ else {
   $statement = $db->prepare("SELECT password FROM users WHERE username = ?");
   $statement->execute([$username]);
   $valid_password = $statement->fetchColumn();
+  // $_SESSION['valid_pass'] = $valid_password;   //remove later  
   
   //check if password is correct
   if (password_verify($password, $valid_password)) {

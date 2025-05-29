@@ -1,5 +1,5 @@
 <?php
-// start_session();
+session_start();
 require_once('./user.php');
 
 $username = $_REQUEST['username'];
@@ -9,8 +9,8 @@ $password2 = $_REQUEST['password2'];
 
 //check if passwords entered match
 if ($password != $password2) {
-  echo "Passwords do not match";
-  // header("Location: /new_user.php");
+  $_SESSION['pass_mismatch'] = true;
+  header("Location: /new_user.php");
 } 
   
 else {  //attempt create new user

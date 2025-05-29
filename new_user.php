@@ -1,5 +1,14 @@
 <?php
+session_start();
 
+if (isset($_SESSION['pass_mismatch'])) {
+  echo "Passwords do not match";
+  unset($_SESSION['pass_mismatch']);
+}
+if (isset($_SESSION['user_exists'])) {
+  echo "User already exists"; 
+  unset($_SESSION['user_exists']);
+}
 
 ?>
 

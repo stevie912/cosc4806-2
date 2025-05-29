@@ -18,7 +18,7 @@ Class User {
     $statement = $db->prepare("SELECT * FROM users WHERE username = ?");  
     $statement->execute([$username]);
     if ($statement->rowCount() > 0) {
-      echo "User already exists";  
+      $_SESSION['user_exists'] = true; 
       header("Location: /new_user.php");
     }
       
@@ -27,7 +27,7 @@ Class User {
       $statement = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
       $statement->execute([$username, $password]);
       echo "User created successfully";  
-      header("Location: /login.php");
+      echo "<br><a href='/login.php'>Click here to login</a>";
     }
   }
   
