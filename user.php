@@ -23,10 +23,11 @@ Class User {
     }
       
     else {  //create new user
-    $statement = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-    $statement->execute([$username, $password]);
-    echo "User created successfully";  
-    header("Location: /login.php");
+      $password = password_hash($password, PASSWORD_DEFAULT); 
+      $statement = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+      $statement->execute([$username, $password]);
+      echo "User created successfully";  
+      header("Location: /login.php");
     }
   }
   
