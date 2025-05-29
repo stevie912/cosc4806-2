@@ -12,6 +12,8 @@ if ($password != $password2) {
   $_SESSION['pass_mismatch'] = true;
   header("Location: /new_user.php");
 } 
+
+//check password is at least 8 characters long, etc***TODO***
   
 else {  //attempt create new user
   $user = new User();

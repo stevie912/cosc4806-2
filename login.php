@@ -7,12 +7,13 @@
 
   if (isset($_SESSION['failed_attempts'])) {
     echo "This is unsuccessful attempt number " . $_SESSION['failed_attempts'];
-    // echo "Input hash: " . $_SESSION['pass'];
-    // echo "DB hash: " . $_SESSION['valid_pass'];
+    echo "<br>Input hash: " . $_SESSION['pass'];
+    echo "<br>DB hash: " . $_SESSION['valid_pass'];
   }
 
   if (isset($_SESSION['no_user'])) {
     echo "No such user exists";
+    unset($_SESSION['no_user']);  
   }
 ?>
 
@@ -26,7 +27,7 @@
 
     <h1>Login Form</h1>
 
-    <form action="/validate.php" method="post">  //add validate.php and modify
+    <form action="/validate.php" method="post">
       <label for="username">Username:</label>
       <br>
       <input type="text" id="username" name="username">

@@ -6,8 +6,8 @@ require_once('./database.php');
 $username = $_REQUEST['username'];
 $_SESSION['username'] = $username;
 $password = $_REQUEST['password'];
-$password = password_hash($password, PASSWORD_DEFAULT);
-// $_SESSION['pass'] = $password;
+
+$_SESSION['pass'] = "user " . $password;  //remove later
 
 $db = db_connect();
 //check user is in database
@@ -22,10 +22,13 @@ if ($statement->rowCount() == 0) {  //user not found
   
 else {
   //get hashed password from database
-  $statement = $db->prepare("SELECT password FROM users WHERE username = ?");
-  $statement->execute([$username]);
-  $valid_password = $statement->fetchColumn();
-  // $_SESSION['valid_pass'] = $valid_password;   //remove later  
+  $statement = $db->prepare("SELECT password FROM users WHERE username = :username");
+  $statement->bindParam(':username', $username);
+  $statement->execute();
+  $statement->bindColumn('password', $valid_password);
+  $$valid_password = $statement->fetch(PDO::FETCH_BOUND);
+    
+  $_SESSION['valid_pass'] = "db ". $valid_password;   //remove later  
   
   //check if password is correct
   if (password_verify($password, $valid_password)) {
