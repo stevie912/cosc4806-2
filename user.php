@@ -13,8 +13,21 @@ Class User {
 
   public function create_user($username, $password) {
     $db = db_connect();
+
+    //check if user already exists
+    $statement = $db->prepare("SELECT * FROM users WHERE username = ?");  
+    $statement->execute([$username]);
+    if ($statement->rowCount() > 0) {
+      echo "User already exists";  
+      header("Location: /new_user.php");
+    }
+      
+    else {  //create new user
     $statement = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
     $statement->execute([$username, $password]);
+    echo "User created successfully";  
+    header("Location: /login.php");
+    }
   }
   
 }
