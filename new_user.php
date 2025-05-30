@@ -9,6 +9,10 @@ if (isset($_SESSION['user_exists'])) {
   echo "User already exists"; 
   unset($_SESSION['user_exists']);
 }
+if (isset($_SESSION['pass_insecure'])) {
+  echo "Password must contain at least 8 characters, lower and upper case, and a number";
+  unset($_SESSION['pass_insecure']);
+}
 
 ?>
 

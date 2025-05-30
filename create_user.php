@@ -13,7 +13,12 @@ if ($password != $password2) {
   header("Location: /new_user.php");
 } 
 
-//check password is at least 8 characters long, etc***TODO***
+//check password is at least 8 characters long, lower and upper case, and contains a number
+$pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/';
+if (!preg_match($pattern, $password)) {
+  $_SESSION['pass_insecure'] = true;
+  header("Location: /new_user.php");
+}
   
 else {  //attempt create new user
   $user = new User();

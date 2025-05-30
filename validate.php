@@ -7,8 +7,6 @@ $username = $_REQUEST['username'];
 $_SESSION['username'] = $username;
 $password = $_REQUEST['password'];
 
-$_SESSION['pass'] = "user " . $password;  //remove later
-
 $db = db_connect();
 //check user is in database
 $statement = $db->prepare("SELECT * FROM users WHERE username = ?");
@@ -27,9 +25,7 @@ else {
   $statement->execute();
   $statement->bindColumn('password', $valid_password);
   $$valid_password = $statement->fetch(PDO::FETCH_BOUND);
-    
-  $_SESSION['valid_pass'] = "db ". $valid_password;   //remove later  
-  
+      
   //check if password is correct
   if (password_verify($password, $valid_password)) {
     $_SESSION['authenticated'] = true;

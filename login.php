@@ -7,8 +7,6 @@
 
   if (isset($_SESSION['failed_attempts'])) {
     echo "This is unsuccessful attempt number " . $_SESSION['failed_attempts'];
-    echo "<br>Input hash: " . $_SESSION['pass'];
-    echo "<br>DB hash: " . $_SESSION['valid_pass'];
   }
 
   if (isset($_SESSION['no_user'])) {
